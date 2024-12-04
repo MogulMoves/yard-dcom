@@ -1,0 +1,16 @@
+body {
+	width: 400px;
+	height: 100px;
+	background: black;
+	color: white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: sans-serif;
+	gap: 16px;
+}
+
+.logo {
+	width: 64px;
+	height: 64px;
+}
