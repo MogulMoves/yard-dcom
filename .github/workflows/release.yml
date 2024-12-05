@@ -30,6 +30,7 @@ jobs:
                 throw e;
               }
             }
+            const fs = require('fs/promises');
             const current = JSON.parse(await fs.readFileSync('manifest.json', 'utf8')).version;
 
             if (current === latest) {
