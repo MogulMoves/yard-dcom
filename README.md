@@ -1,5 +1,11 @@
 # How To Install
 
+## Firefox Users:
+
+[Click here](https://addons.mozilla.org/en-US/firefox/addon/the-yard-dcom/)
+
+## Chrome Users:
+
 1. Download the latest release from the [releases page](https://github.com/MogulMoves/yard-dcom/releases)
 2. Unzip the zip file
 3. Open the extension settings (go to `chrome://extensions/` in your browser)

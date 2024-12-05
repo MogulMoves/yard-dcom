@@ -6,3 +6,16 @@
 	z-index: 9999;
 	border: none;
 }
+
+#yard-toast {
+	position: fixed;
+	top: 4px;
+	right: 4px;
+	padding: 8px 16px;
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+	font-size: 18px;
+	border-radius: 4px;
+	z-index: 9999;
+	text-decoration: none;
+}

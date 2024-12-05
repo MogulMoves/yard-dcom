@@ -49,3 +49,39 @@ async function updateRSS(url) {
 	}
 	window.postMessage({ __yard__: true, rss: newVideos }, '*');
 }
+
+let updatesNeeded = false;
+async function checkForUpdates() {
+	if (updatesNeeded) return;
+	const currentVersion = browser.runtime.getManifest().version;
+
+	const latestVersion = await fetch(
+		'https://api.github.com/repos/MogulMoves/yard-dcom/releases/latest',
+	)
+		.then((res) => res.json())
+		.then((data) => data.tag_name);
+
+	console.log(
+		`[YARD] Current version: ${currentVersion}, latest version: ${latestVersion}`,
+	);
+
+	if (!latestVersion) return;
+	if (currentVersion === latestVersion) return;
+
+	updatesNeeded = true;
+
+	setInterval(() => {
+		if (document.getElementById('yard-toast')) return;
+		const toast = document.createElement('a');
+		toast.href = 'https://github.com/MogulMoves/yard-dcom/releases/latest';
+		toast.target = '_blank';
+		toast.id = 'yard-toast';
+		toast.innerText = `Yard update: ${latestVersion} (click here to download)`;
+		document.body.appendChild(toast);
+	}, 500);
+}
+
+console.log('[YARD] Version:', browser.runtime.getManifest().version);
+
+checkForUpdates();
+setInterval(checkForUpdates, 1000 * 60 * 60);
