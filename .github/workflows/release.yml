@@ -17,11 +17,19 @@ jobs:
         id: version
         with:
           script: |
-            const latest = (await github.rest.repos.getLatestRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-            })).data.tag_name;
-
+            let latest;
+            try {
+              latest = (await github.rest.repos.getLatestRelease({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              })).data.tag_name;
+            } catch (e) {
+              if (e.status === 404) {
+                latest = null;
+              } else {
+                throw e;
+              }
+            }
             const current = JSON.parse(await fs.readFileSync('manifest.json', 'utf8')).version;
 
             if (current === latest) {
