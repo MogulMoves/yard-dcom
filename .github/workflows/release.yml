@@ -31,7 +31,7 @@ jobs:
               }
             }
             const fs = require('fs/promises');
-            const current = JSON.parse(await fs.readFileSync('manifest.json', 'utf8')).version;
+            const current = JSON.parse(await fs.readFile('manifest.json', 'utf8')).version;
 
             if (current === latest) {
               throw new Error(`Same version (${current}), not releasing`);
