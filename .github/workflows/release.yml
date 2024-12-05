@@ -45,4 +45,5 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: yard-dcom-${{ steps.version.outputs.result }}.zip
-          body-path: README.md
+          body_path: README.md
+          tag_name: ${{ steps.version.outputs.result }}
