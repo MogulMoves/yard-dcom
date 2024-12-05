@@ -1,7 +1,12 @@
 {
 	"manifest_version": 3,
 	"name": "The Yard",
-	"version": "1.0.3",
+	"version": "1.0.4",
+	"browser_specific_settings": {
+		"gecko": {
+			"id": "dcom@yard.sale"
+		}
+	},
 	"description": "Watch Disney Channel Original Movies with Yard commentary.",
 	"icons": {
 		"16": "assets/logo16.png",
