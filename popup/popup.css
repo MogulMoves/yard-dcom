@@ -10,7 +10,45 @@ body {
 	gap: 16px;
 }
 
+label {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 2px;
+}
+
+a {
+	color: #93c5fd;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+p {
+	margin: 0;
+}
+
+.label {
+	font-weight: 600;
+	font-size: 14px;
+}
+
 .logo {
 	width: 64px;
 	height: 64px;
+}
+
+#rss {
+	background: transparent;
+	border: 1px solid #fff;
+	color: #fff;
+	padding: 4px 8px;
+	border-radius: 4px;
+	outline: none;
+	transition: box-shadow 0.1s;
+}
+
+#rss:focus-visible {
+	box-shadow: 0 0 0 1px #fff;
 }

@@ -1,8 +1,8 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",
-    "module": "CommonJS",
-    "strict": true,
-    "noUncheckedIndexedAccess": true
-  }
+	"compilerOptions": {
+		"target": "ESNext",
+		"module": "CommonJS",
+		"strict": true,
+		"noUncheckedIndexedAccess": true
+	}
 }

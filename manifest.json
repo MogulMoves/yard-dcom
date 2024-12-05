@@ -1,33 +1,33 @@
 {
-  "manifest_version": 3,
-  "name": "The Yard",
-  "version": "1.1.0",
-  "description": "Watch Disney Channel Original Movies with Yard commentary.",
-  "icons": {
-    "16": "assets/logo16.png",
-    "48": "assets/logo48.png",
-    "128": "assets/logo128.png"
-  },
-  "action": {
-    "default_popup": "popup/popup.html"
-  },
-  "permissions": ["storage"],
-  "host_permissions": ["*://*.disneyplus.com/*", "*://*.patreon.com/*"],
-  "content_scripts": [
-    {
-      "js": ["browser-polyfill.js", "content/content.js"],
-      "css": ["content/index.css"],
-      "matches": ["*://*.disneyplus.com/*"]
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": ["audio/audio.html"],
-      "matches": ["*://*.disneyplus.com/*"]
-    },
-    {
-      "resources": ["browser-polyfill.js", "content/injected.js"],
-      "matches": ["*://*.disneyplus.com/*", "*://*.patreon.com/*"]
-    }
-  ]
+	"manifest_version": 3,
+	"name": "The Yard",
+	"version": "1.0.3",
+	"description": "Watch Disney Channel Original Movies with Yard commentary.",
+	"icons": {
+		"16": "assets/logo16.png",
+		"48": "assets/logo48.png",
+		"128": "assets/logo128.png"
+	},
+	"action": {
+		"default_popup": "popup/popup.html"
+	},
+	"permissions": ["storage"],
+	"host_permissions": ["*://*.disneyplus.com/*", "*://*.patreon.com/*"],
+	"content_scripts": [
+		{
+			"js": ["browser-polyfill.js", "content/yard-content.js"],
+			"css": ["content/index.css"],
+			"matches": ["*://*.disneyplus.com/*"]
+		}
+	],
+	"web_accessible_resources": [
+		{
+			"resources": ["audio/audio.html"],
+			"matches": ["*://*.disneyplus.com/*"]
+		},
+		{
+			"resources": ["browser-polyfill.js", "content/yard-inject.js"],
+			"matches": ["*://*.disneyplus.com/*", "*://*.patreon.com/*"]
+		}
+	]
 }
