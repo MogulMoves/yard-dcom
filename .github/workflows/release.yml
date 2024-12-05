@@ -1,0 +1,39 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Compare versions
+        uses: actions/github-script@v7
+        id: version
+        with:
+          script: |
+            const latest = (await github.rest.repos.getLatestRelease({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })).data.tag_name;
+
+            const current = JSON.parse(await fs.readFileSync('manifest.json', 'utf8')).version;
+
+            if (current === latest) {
+              throw new Error(`Same version (${current}), not releasing`);
+            }
+            return current;
+
+      - name: Zip extension
+        run: zip -r "yard-dcom-${{ steps.version.outputs.result }}.zip" . -x ".prettierrc" ".prettierignore" "jsconfig.json" ".github/*" ".git/*"
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: yard-dcom-${{ steps.version.outputs.result }}.zip
+          body-path: README.md
