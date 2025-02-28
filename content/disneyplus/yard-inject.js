@@ -24,15 +24,20 @@ function getVideo() {
 	if (!disneyPlayer) return null;
 	// The biggest video is probably the one we're watching (sometimes there are hidden ones with size 0)
 	const videos = document.querySelectorAll('video');
+	/** @type {HTMLVideoElement | undefined} */
 	let biggestVideo;
-	let biggestWidth = 0;
-	for (let i = 0; i < videos.length; i++) {
-		const video = videos[i];
-		const rect = video.getBoundingClientRect();
-		if (rect.width > biggestWidth) {
-			biggestWidth = rect.width;
-			biggestVideo = video;
+	if (videos.length > 1) {
+		let biggestWidth = 0;
+		for (let i = 0; i < videos.length; i++) {
+			const video = videos[i];
+			const rect = video.getBoundingClientRect();
+			if (rect.width > biggestWidth) {
+				biggestWidth = rect.width;
+				biggestVideo = video;
+			}
 		}
+	} else {
+		biggestVideo = videos[0];
 	}
 	if (!biggestVideo) return null;
 	const title = document

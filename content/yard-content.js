@@ -1,9 +1,22 @@
+/**
+ * @returns {'disneyplus' | 'netflix' | null}
+ */
+function getSite() {
+	const host = location.hostname;
+	if (host.includes('disneyplus.com')) return 'disneyplus';
+	if (host.includes('netflix.com')) return 'netflix';
+	return null;
+}
+
 // Inject the player monitor into the page
 // (it needs to be injected because it accesses properties on the disney player)
-const script = document.createElement('script');
-script.dataset.frame = browser.runtime.getURL('audio/audio.html');
-script.src = browser.runtime.getURL('content/yard-inject.js');
-(document.head || document.documentElement).appendChild(script);
+const site = getSite();
+if (site) {
+	const script = document.createElement('script');
+	script.dataset.frame = browser.runtime.getURL('audio/audio.html');
+	script.src = browser.runtime.getURL(`content/${site}/yard-inject.js`);
+	(document.head || document.documentElement).appendChild(script);
+}
 
 browser.storage.sync.get('rss').then((value) => {
 	if (value.rss) updateRSS(value.rss);
