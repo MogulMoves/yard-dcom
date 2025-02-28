@@ -40,7 +40,7 @@ jobs:
             return current;
 
       - name: Zip extension
-        run: zip -r "yard-dcom-${{ steps.version.outputs.result }}.zip" . -x ".prettierrc" ".prettierignore" "jsconfig.json" ".github/*" ".git/*"
+        run: zip -r "yard-dcom-${{ steps.version.outputs.result }}.zip" . -x ".prettierrc" ".prettierignore" ".ottotime" ".gitattributes" "jsconfig.json" ".github/*" ".git/*"
 
       - name: Create release
         uses: softprops/action-gh-release@v2
