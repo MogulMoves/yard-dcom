@@ -70,7 +70,9 @@ setInterval(() => {
 		videoDetails.video.addEventListener('play', () => {
 			sendMessage('play', {
 				// This is why we need to be injected - it's a web component
-				time: videoDetails.disneyPlayer.mediaPlayer.currentTime,
+				time:
+					videoDetails.disneyPlayer.mediaPlayer.timeline.info
+						.playheadPositionMs / 1000,
 			});
 		});
 		videoDetails.video.addEventListener('pause', () => {
@@ -78,7 +80,9 @@ setInterval(() => {
 		});
 		videoDetails.video.addEventListener('timeupdate', () => {
 			sendMessage('timeupdate', {
-				time: videoDetails.disneyPlayer.mediaPlayer.currentTime,
+				time:
+					videoDetails.disneyPlayer.mediaPlayer.timeline.info
+						.playheadPositionMs / 1000,
 			});
 		});
 		return;
