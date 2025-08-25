@@ -44,10 +44,15 @@ function getVideo() {
 		.querySelector('.title-field')
 		?.textContent.toLowerCase();
 	if (!title) return null;
+	const id = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/
+		.exec(window.location.pathname)?.[0]
+		?.toLowerCase();
+	if (!id) return null;
 	return {
 		disneyPlayer,
 		video: biggestVideo,
 		title,
+		id,
 	};
 }
 
@@ -56,13 +61,15 @@ setInterval(() => {
 	const videoDetails = getVideo();
 	if (videoDetails && !loaded) {
 		const matchingVideo = rssFeed.find((video) =>
-			video.title.startsWith(videoDetails.title + ' ('),
+			video.description.includes(videoDetails.id),
 		);
 		if (!matchingVideo) {
 			console.log(`[YARD] No matching video found for "${videoDetails.title}"`);
 			return;
 		}
-		console.log(`[YARD] Video loaded: ${videoDetails.title}`);
+		console.log(
+			`[YARD] Video loaded: ${videoDetails.title} (${matchingVideo.title})`,
+		);
 
 		loaded = true;
 		sendMessage('loaded', matchingVideo);
@@ -70,7 +77,9 @@ setInterval(() => {
 		videoDetails.video.addEventListener('play', () => {
 			sendMessage('play', {
 				// This is why we need to be injected - it's a web component
-				time: videoDetails.disneyPlayer.mediaPlayer.currentTime,
+				time:
+					videoDetails.disneyPlayer.mediaPlayer.timeline.info
+						.playheadPositionMs / 1000,
 			});
 		});
 		videoDetails.video.addEventListener('pause', () => {
@@ -78,7 +87,9 @@ setInterval(() => {
 		});
 		videoDetails.video.addEventListener('timeupdate', () => {
 			sendMessage('timeupdate', {
-				time: videoDetails.disneyPlayer.mediaPlayer.currentTime,
+				time:
+					videoDetails.disneyPlayer.mediaPlayer.timeline.info
+						.playheadPositionMs / 1000,
 			});
 		});
 		return;

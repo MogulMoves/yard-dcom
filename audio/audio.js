@@ -4,7 +4,6 @@ window.addEventListener('message', (ev) => {
 	const msg = JSON.parse(ev.data);
 
 	const delay = (Date.now() - msg.ts) / 1000;
-
 	switch (msg.event) {
 		case 'loaded':
 			audio.src = msg.message.audioUrl;

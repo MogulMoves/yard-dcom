@@ -1,13 +1,8 @@
 {
 	"manifest_version": 3,
-	"name": "The Yard",
+	"name": "Binge & Cringe",
 	"version": "1.0.6",
-	"browser_specific_settings": {
-		"gecko": {
-			"id": "dcom@yard.sale"
-		}
-	},
-	"description": "Watch movies online with Yard commentary.",
+	"description": "Watch Disney+ TV Shows and Movies with commentary from Stanz and Joe",
 	"icons": {
 		"16": "assets/logo16.png",
 		"48": "assets/logo48.png",
@@ -17,34 +12,22 @@
 		"default_popup": "popup/popup.html"
 	},
 	"permissions": ["storage"],
-	"host_permissions": [
-		"*://*.disneyplus.com/*",
-		"*://*.netflix.com/*",
-		"*://*.patreon.com/*"
-	],
+	"host_permissions": ["*://*.disneyplus.com/*", "*://*.patreon.com/*"],
 	"content_scripts": [
 		{
 			"js": ["browser-polyfill.js", "content/yard-content.js"],
 			"css": ["content/index.css"],
-			"matches": ["*://*.disneyplus.com/*", "*://*.netflix.com/*"]
+			"matches": ["*://*.disneyplus.com/*"]
 		}
 	],
 	"web_accessible_resources": [
 		{
 			"resources": ["audio/audio.html"],
-			"matches": ["*://*.netflix.com/*", "*://*.disneyplus.com/*"]
+			"matches": ["*://*.disneyplus.com/*"]
 		},
 		{
-			"resources": [
-				"browser-polyfill.js",
-				"content/disneyplus/yard-inject.js",
-				"content/netflix/yard-inject.js"
-			],
-			"matches": [
-				"*://*.disneyplus.com/*",
-				"*://*.netflix.com/*",
-				"*://*.patreon.com/*"
-			]
+			"resources": ["browser-polyfill.js", "content/disneyplus/yard-inject.js"],
+			"matches": ["*://*.disneyplus.com/*", "*://*.patreon.com/*"]
 		}
 	]
 }
